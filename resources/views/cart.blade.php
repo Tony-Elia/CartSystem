@@ -9,7 +9,7 @@
         </div>
 
         <div class="font-black ml-10 my-10 flex flex-row flex-nowrap items-baseline justify-between">
-            <h1 class="text-3xl">Total Amount: ${{ session('total_amount', 0) }}</h1>
+            <h1 class="text-3xl">Total Amount: $<span id="order-total">{{ session('total_amount', 0) }}</span></h1>
             <form method="POST" action="{{ route('order.checkout') }}">
                 @csrf
 

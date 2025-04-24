@@ -33,6 +33,15 @@ class CartController extends Controller
         return $this->success([$count]);
     }
 
+    public function update(Request $request)
+    {
+        $cart = $this->cart_service->update(session('cart', []), $request->product_id, $request->quantity);
+        session(['cart' => $cart]);
+        $total_amount = $this->cart_service->totalAmount($cart);
+        session(['total_amount' => $total_amount]);
+        return $this->success([$total_amount]);
+    }
+
     public function totalItems(): \Illuminate\Http\JsonResponse
     {
         return $this->success([$this->cart_service->totalCartItems()]);

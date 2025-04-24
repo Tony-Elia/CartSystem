@@ -26,6 +26,14 @@ class CartService
         return $cart;
     }
 
+    public function update($cart, $product_id, $quantity)
+    {
+        if(isset($cart[$product_id])) {
+            $cart[$product_id]['quantity'] = $quantity;
+        }
+        return $cart;
+    }
+
     public function totalCartItems($cart = null)
     {
         if($cart == null) $cart = $this->getCart(); // if there is no passed cart retrieve it from the session

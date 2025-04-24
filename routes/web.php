@@ -6,6 +6,7 @@ Route::get('/', [\App\Http\Controllers\ProductController::class, 'index'])->name
 Route::controller(\App\Http\Controllers\CartController::class)->prefix('cart')->group(function () {
     Route::post('add', 'add');
     Route::get('/', 'index')->name('cart.index');
+    Route::put('/update', 'update');
     Route::get('/total_items', 'totalItems');
 });
 
