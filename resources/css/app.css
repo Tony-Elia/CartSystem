@@ -9,3 +9,76 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+:root {
+    --priamry-color: #1545a9;
+    --main-bg: #333333;
+}
+
+.color-primary {
+    color: var(--priamry-color);
+}
+
+.bg-primary {
+    background-color: var(--priamry-color);
+}
+
+.bg-main {
+    background-color: var(--main-bg);
+}
+
+/* From Uiverse.io by devdariill */
+button {
+    cursor: pointer;
+    transition: 0.25s;
+    background-color: var(--priamry-color);
+    box-shadow: 0px 0px 10px var(--priamry-color);
+}
+
+button:hover {
+    box-shadow: 0px 0px 25px #001A6E;
+}
+
+button.danger {
+    background-color: red;
+    box-shadow: 0px 0px 10px red;
+}
+
+button.danger:hover {
+    box-shadow: 0px 0px 25px red;
+}
+
+/* From Uiverse.io by Codewithvinay */
+.product-card {
+    border-radius: 49px;
+    background: #212121;
+    box-shadow:  7px 7px 12px #0e0e0e,
+        -7px -7px 12px #313131;
+}
+
+.cart-badge {
+    background-color: red;
+    border-radius: 50%;
+    width: fit-content;
+    height: 24px;
+    position: absolute;
+    color: white;
+    top: -5px;
+    left: 65%;
+    display: block;
+    font-size: 11pt;
+    padding: 0px 8px;
+}
+
+/* From Uiverse.io by garerim */
+.hollow-input {
+    margin: 30px;
+    background: none;
+    border: none;
+    outline: none;
+    max-width: 190px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 9999px;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+    color: #fff;
+}

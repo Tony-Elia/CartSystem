@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    //
+    use ApiResponse;
+    public function checkout(Request $request)
+    {
+        return redirect()->route('home');
+    }
 }
