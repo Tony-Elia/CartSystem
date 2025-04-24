@@ -39,7 +39,9 @@ class CartController extends Controller
         session(['cart' => $cart]);
         $total_amount = $this->cart_service->totalAmount($cart);
         session(['total_amount' => $total_amount]);
-        return $this->success([$total_amount]);
+        $total_cart_items = $this->cart_service->totalCartItems($cart);
+        session(['total_cart_items' => $total_cart_items]);
+        return $this->success([$total_amount, $total_cart_items]);
     }
 
     public function totalItems(): \Illuminate\Http\JsonResponse

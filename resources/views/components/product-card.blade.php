@@ -68,6 +68,7 @@
                     .then(data => {
                         this.subtotal = this.quantity * this.productPrice;
                         document.getElementById('order-total').textContent = data.data[0].toFixed(2);
+                        document.getElementById('cart-counter').textContent = data.data[1];
                     });
             }
         }

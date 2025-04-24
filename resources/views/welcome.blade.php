@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-main>
     <div x-data="cartHandler()">
 
         <!-- Product Grid -->
@@ -81,4 +81,4 @@
             }
         }
     </script>
-</x-app-layout>
+</x-main>

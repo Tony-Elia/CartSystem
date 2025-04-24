@@ -1,4 +1,5 @@
 import './bootstrap';
+
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;
@@ -15,6 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
     })
         .then(data => data.json())
         .then(data => {
-            document.getElementById('cart-counter').textContent = data.data[0];
+            updateCartCounter(data.data[0])
         });
 });

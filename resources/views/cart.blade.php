@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-main>
     <div class="flex flex-col m-4 mx-auto md:max-w-5xl">
 
         <!-- Product Grid -->
@@ -18,4 +18,4 @@
         </div>
 
     </div>
-</x-app-layout>
+</x-main>
