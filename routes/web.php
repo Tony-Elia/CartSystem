@@ -9,6 +9,7 @@ Route::controller(\App\Http\Controllers\CartController::class)->prefix('cart')->
     Route::get('/', 'index')->name('cart.index');
     Route::put('/update', 'update');
     Route::get('/total_items', 'totalItems');
+    Route::delete('/remove', 'remove');
 });
 
 Route::controller(\App\Http\Controllers\OrderController::class)->prefix('order')->group(function () {

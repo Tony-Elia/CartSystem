@@ -1,5 +1,6 @@
 <div class="product-card p-6 m-5 bg-[#333333] flex flex-col justify-around text-white"
-     x-data="productCard({{ $key }}, {{ $product['price'] }}, {{ $quantity ?? 1 }})">
+     x-data="productCard({{ $key }}, {{ $product['price'] }}, {{ $quantity ?? 1 }})"
+    id="{{ $key }}">
 
     @if(isset($product['image']))
         <img src="{{ asset($product['image']) }}" alt="{{ $product['name'] }}" class="w-full h-64 object-cover rounded">
@@ -32,12 +33,21 @@
     </div>
 
     @if(isset($quantity) && $quantity > 0)
+        <div class="flex flex-row mt-2">
             <button
-                class="w-full mt-2 px-4 py-2 text-white rounded-full cursor-pointer mr-3"
+                class="w-1/2 danger rounded-full px-4 py-2 mr-3"
+                @click="cartStore().deleteFromCart({ id: {{ $key }} })"
+            >
+                Remove Item
+            </button>
+
+            <button
+                class="w-full px-4 py-2 text-white rounded-full cursor-pointer"
                 @click="updateCart()"
             >
                 Update
             </button>
+        </div>
     @endif
 
 </div>

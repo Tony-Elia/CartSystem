@@ -4,7 +4,7 @@
         <!-- Product Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 md:gap-4">
             @foreach($cart as $id => $product)
-                <x-product-card :product="$product" :key="$id" :quantity="$product['quantity']" />
+                <x-product-card id="5" :product="$product" :key="$id" :quantity="$product['quantity']" />
             @endforeach
         </div>
 

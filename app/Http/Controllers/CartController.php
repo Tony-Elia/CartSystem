@@ -25,27 +25,37 @@ class CartController extends Controller
 
         $cart = $this->cart_service->addProduct($cart, $product_id, $request->quantity);
 
-        session(['cart' => $cart]);
-        $count = $this->cart_service->totalCartItems($cart);
-        session(['total_cart_items' => $count]);
-        $total_amount = $this->cart_service->totalAmount($cart);
-        session(['total_amount' => $total_amount]);
-        return $this->success([$count]);
+        [$total_amount, $total_cart_items] = $this->updateSessionStats($cart);
+        return $this->success([$total_cart_items]);
     }
 
     public function update(Request $request)
     {
         $cart = $this->cart_service->update(session('cart', []), $request->product_id, $request->quantity);
-        session(['cart' => $cart]);
-        $total_amount = $this->cart_service->totalAmount($cart);
-        session(['total_amount' => $total_amount]);
-        $total_cart_items = $this->cart_service->totalCartItems($cart);
-        session(['total_cart_items' => $total_cart_items]);
-        return $this->success([$total_amount, $total_cart_items]);
+
+        return $this->success($this->updateSessionStats($cart));
     }
 
     public function totalItems(): \Illuminate\Http\JsonResponse
     {
         return $this->success([$this->cart_service->totalCartItems()]);
+    }
+
+    public function remove(Request $request)
+    {
+        $product_id = $request->product_id;
+        $cart = $this->cart_service->remove($product_id);
+
+        return $this->success($this->updateSessionStats($cart));
+    }
+
+    private function updateSessionStats($cart): array
+    {
+        session(['cart' => $cart]);
+        $total_amount = $this->cart_service->totalAmount($cart);
+        session(['total_amount' => $total_amount]);
+        $total_cart_items = $this->cart_service->totalCartItems($cart);
+        session(['total_cart_items' => $total_cart_items]);
+        return [$total_amount, $total_cart_items];
     }
 }

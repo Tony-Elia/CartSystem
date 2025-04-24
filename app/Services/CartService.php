@@ -50,4 +50,12 @@ class CartService
     {
         return session('cart', []);
     }
+
+    public function remove($product_id)
+    {
+        $cart = $this->getCart();
+
+        if(isset($cart[$product_id])) unset($cart[$product_id]);
+        return $cart;
+    }
 }
