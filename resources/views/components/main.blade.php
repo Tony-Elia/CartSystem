@@ -16,16 +16,19 @@
     <!-- Navigation -->
     <nav class="bg-[#333333] p-4 px-6 fixed top-0 left-0 w-full h-[60px] flex flex-row items-center justify-between">
         <a href="/" class="text-white font-bold text-2xl">{{ config('app.name', 'Laravel') }}</a>
-{{--                    @auth--}}
-{{--                        <a href="{{ route('orders_history') }}" class="text-white">Dashboard</a>--}}
-{{--                    @else--}}
-{{--                        <a href="{{ route('login') }}" class="text-white">Login</a>--}}
-{{--                        <a href="{{ route('register') }}" class="text-white">Register</a>--}}
-{{--                    @endauth--}}
-        <a href="{{ route('cart.index') }}" class="mr-5 relative">
-            <img class="h-[35px]" src="{{ asset('storage/cart.png') }}" alt="cart">
-            <span id="cart-counter" class="cart-badge">{{ session('total_cart_items', 0) }}</span>
-        </a>
+        <div class="flex flex-row items-center">
+            @auth
+                <a href="{{ route('profile.edit') }}" class="text-white">Profile</a>
+                <a href="{{ route('order.index') }}" class="text-white mx-3">My Orders</a>
+            @else
+                <a href="{{ route('login') }}" class="text-white">Login</a>
+                <a href="{{ route('register') }}" class="text-white mx-3">Register</a>
+            @endauth
+            <a href="{{ route('cart.index') }}" class="mx-5 relative">
+                <img class="h-[35px]" src="{{ asset('storage/cart.png') }}" alt="cart">
+                <span id="cart-counter" class="cart-badge">{{ session('total_cart_items', 0) }}</span>
+            </a>
+        </div>
     </nav>
 
     <!-- Main Content -->

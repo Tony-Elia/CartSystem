@@ -21,7 +21,11 @@ class CartController extends Controller
     public function add(Request $request)
     {
         $product_id = $request->product_id;
+        $quantity = $request->quantity;
         $cart = session('cart', []);
+
+        if($quantity <= 0 || $quantity > 100)
+            return $this->error('Quantity should be from 1 to 100');
 
         $cart = $this->cart_service->addProduct($cart, $product_id, $request->quantity);
 
@@ -31,7 +35,11 @@ class CartController extends Controller
 
     public function update(Request $request)
     {
-        $cart = $this->cart_service->update(session('cart', []), $request->product_id, $request->quantity);
+        $quantity = $request->quantity;
+        if($quantity <= 0 || $quantity > 100)
+            return $this->error('Quantity should be from 1 to 100');
+
+        $cart = $this->cart_service->update(session('cart', []), $request->product_id, $quantity);
 
         return $this->success($this->updateSessionStats($cart));
     }

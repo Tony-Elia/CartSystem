@@ -1,4 +1,8 @@
 <x-main>
+
+    <!-- Message Box (Dismissible) -->
+    <x-flash-message :initialMessage="session('message')" />
+
     <div x-data="cartHandler()">
 
         <!-- Product Grid -->
@@ -14,7 +18,7 @@
             x-transition
             class="fixed inset-0 bg-black/60 flex items-center justify-center z-40"
         >
-            <div class="bg-main p-6 rounded shadow-lg w-full max-w-sm z-50 text-white rounded-4xl"
+            <div class="bg-main p-6 shadow-lg w-full max-w-sm z-50 text-white rounded-3xl"
                 @click.outside="resetModal()">
                 <h2 class="text-xl font-semibold mb-4" x-text="selectedProduct?.name"></h2>
                 <p class="mb-2">Price: $<span x-text="totalPrice"></span></p>
@@ -25,8 +29,8 @@
                 </label>
 
                 <div class="flex justify-between mt-4">
-                    <button class="danger px-4 py-2 rounded-3xl" @click="resetModal()">Cancel</button>
-                    <button class="w-full ml-3 bg-blue-600 text-white px-4 py-2 rounded-3xl" @click="submitCart()">Add</button>
+                    <button class="btn danger px-4 py-2 rounded-3xl" @click="resetModal()">Cancel</button>
+                    <button class="btn w-full ml-3 bg-blue-600 text-white px-4 py-2 rounded-3xl" @click="submitCart()">Add</button>
                 </div>
             </div>
         </div>
@@ -65,8 +69,14 @@
                     })
                         .then(data => data.json())
                         .then(data => {
+                            const flash = document.querySelector('[x-data^="flashMessage"]')?._x_dataStack?.[0];
+                            if (data.status) {
+                                this.loadCart(data.data[0]);
+                                flash?.show('Product added successfully');
+                            } else {
+                                flash?.show(data.message ?? 'Something went wrong');
+                            }
                             this.resetModal();
-                            this.loadCart(data.data[0]);
                         });
                 },
 

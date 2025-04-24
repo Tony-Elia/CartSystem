@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 :root {
     --priamry-color: #1545a9;
     --main-bg: #333333;
@@ -19,14 +20,14 @@
 }
 
 /* From Uiverse.io by devdariill */
-button {
+.btn {
     cursor: pointer;
     transition: 0.25s;
     background-color: var(--priamry-color);
     box-shadow: 0px 0px 10px var(--priamry-color);
 }
 
-button:hover {
+.btn:hover {
     box-shadow: 0px 0px 25px #001A6E;
 }
 
@@ -40,7 +41,7 @@ button.danger:hover {
 }
 
 /* From Uiverse.io by Codewithvinay */
-.product-card {
+.product-card, .order-summary {
     border-radius: 49px;
     background: #212121;
     box-shadow:  7px 7px 12px #0e0e0e,

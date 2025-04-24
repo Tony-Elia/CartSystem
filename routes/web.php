@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [\App\Http\Controllers\ProductController::class, 'index'])->name('home');
+Route::get('/', [\App\Http\Controllers\ProductController::class, 'index'])->name('dashboard');
 Route::controller(\App\Http\Controllers\CartController::class)->prefix('cart')->group(function () {
     Route::post('add', 'add');
     Route::get('/', 'index')->name('cart.index');
@@ -12,13 +12,14 @@ Route::controller(\App\Http\Controllers\CartController::class)->prefix('cart')->
     Route::delete('/remove', 'remove');
 });
 
-Route::controller(\App\Http\Controllers\OrderController::class)->prefix('order')->group(function () {
+Route::middleware('auth')->controller(\App\Http\Controllers\OrderController::class)->prefix('order')->group(function () {
     Route::post('checkout', 'checkout')->name('order.checkout');
+    Route::get('/', 'index')->name('order.index');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -33,9 +33,15 @@ window.cartStore = function () {
                 body: JSON.stringify({ product_id: product.id })
             }).then(data => data.json())
                 .then(data => {
-                    document.getElementById('order-total').textContent = data.data[0].toFixed(2);
-                    document.getElementById('cart-counter').textContent = data.data[1];
-                    document.getElementById(product.id).remove();
+                    const flash = document.querySelector('[x-data^="flashMessage"]')?._x_dataStack?.[0];
+                    if(data.status) {
+                        document.getElementById('order-total').textContent = data.data[0].toFixed(2);
+                        document.getElementById('cart-counter').textContent = data.data[1];
+                        document.getElementById(product.id).remove();
+                        flash?.show('Product removed successfully');
+                    } else {
+                        flash?.show(data.message ?? 'Something went wrong');
+                    }
                 });
         }
     }

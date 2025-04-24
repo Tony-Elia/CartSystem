@@ -23,7 +23,7 @@
 
         @else
             <button
-                class="w-full mt-2 px-4 py-2 text-white rounded-full cursor-pointer mr-3"
+                class="btn w-full mt-2 px-4 py-2 text-white rounded-full cursor-pointer mr-3"
                 @click="openModal({ id: {{ $key }}, name: '{{ $product['name'] }}', price: {{ $product['price'] }} })"
             >
                 Add to Cart
@@ -35,14 +35,14 @@
     @if(isset($quantity) && $quantity > 0)
         <div class="flex flex-row mt-2">
             <button
-                class="w-1/2 danger rounded-full px-4 py-2 mr-3"
+                class="btn w-1/2 danger rounded-full px-4 py-2 mr-3"
                 @click="cartStore().deleteFromCart({ id: {{ $key }} })"
             >
                 Remove Item
             </button>
 
             <button
-                class="w-full px-4 py-2 text-white rounded-full cursor-pointer"
+                class="btn w-full px-4 py-2 text-white rounded-full cursor-pointer"
                 @click="updateCart()"
             >
                 Update
@@ -76,9 +76,15 @@
                 })
                     .then(res => res.json())
                     .then(data => {
-                        this.subtotal = this.quantity * this.productPrice;
-                        document.getElementById('order-total').textContent = data.data[0].toFixed(2);
-                        document.getElementById('cart-counter').textContent = data.data[1];
+                        const flash = document.querySelector('[x-data^="flashMessage"]')?._x_dataStack?.[0];
+                        if(data.status) {
+                            this.subtotal = this.quantity * this.productPrice;
+                            document.getElementById('order-total').textContent = data.data[0].toFixed(2);
+                            document.getElementById('cart-counter').textContent = data.data[1];
+                            flash?.show('Quantity updated successfully');
+                        } else {
+                            flash?.show(data.message ?? 'Something went wrong');
+                        }
                     });
             }
         }

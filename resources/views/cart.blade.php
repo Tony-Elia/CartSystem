@@ -1,4 +1,5 @@
 <x-main>
+    <x-flash-message></x-flash-message>
     <div class="flex flex-col m-4 mx-auto md:max-w-5xl">
 
         <!-- Product Grid -->
@@ -12,8 +13,7 @@
             <h1 class="text-3xl">Total Amount: $<span id="order-total">{{ session('total_amount', 0) }}</span></h1>
             <form method="POST" action="{{ route('order.checkout') }}">
                 @csrf
-
-                <button type="submit" class="text-xl ml-4 rounded-full py-3 px-[100px]">Checkout</button>
+                <button type="submit" class="btn text-xl ml-4 rounded-full py-3 px-[100px]">Checkout</button>
             </form>
         </div>
 

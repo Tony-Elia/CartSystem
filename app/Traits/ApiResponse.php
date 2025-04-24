@@ -15,7 +15,7 @@ trait ApiResponse
         ], $code);
     }
 
-    protected function error(array $errors = [], string $message = 'Error', int $code = 400): JsonResponse
+    protected function error(string $message = 'Error', array $errors = [], int $code = 400): JsonResponse
     {
         return response()->json([
             'status' => false,

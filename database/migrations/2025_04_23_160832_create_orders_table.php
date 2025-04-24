@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(\App\Models\User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->double('total_amount');
-            $table->enum('status', ['pending, paid, canceled']);
+            $table->enum('status', ['pending', 'paid', 'canceled']);
             $table->timestamps();
         });
     }
