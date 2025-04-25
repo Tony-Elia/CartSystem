@@ -61,32 +61,19 @@
             get subtotal() {
                 return this.quantity * this.productPrice;
             },
-
             updateCart() {
-                fetch('/cart/update', {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    },
-                    body: JSON.stringify({
-                        product_id: productId,
-                        quantity: this.quantity
-                    })
-                })
-                    .then(res => res.json())
+                updateCartRequest(productId, this.quantity)
                     .then(data => {
-                        const flash = document.querySelector('[x-data^="flashMessage"]')?._x_dataStack?.[0];
-                        if(data.status) {
-                            this.subtotal = this.quantity * this.productPrice;
+                        if (data.status) {
                             document.getElementById('order-total').textContent = data.data[0].toFixed(2);
                             document.getElementById('cart-counter').textContent = data.data[1];
-                            flash?.show('Quantity updated successfully');
+                            flash('Quantity updated successfully');
                         } else {
-                            flash?.show(data.message ?? 'Something went wrong');
+                            flash(data.message ?? 'Something went wrong');
                         }
                     });
             }
+
         }
     }
 </script>

@@ -56,25 +56,13 @@
                 },
 
                 submitCart() {
-                    fetch('/cart/add', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                        },
-                        body: JSON.stringify({
-                            product_id: this.selectedProduct.id,
-                            quantity: this.quantity
-                        })
-                    })
-                        .then(data => data.json())
+                    addCartItem(this.selectedProduct.id, this.quantity)
                         .then(data => {
-                            const flash = document.querySelector('[x-data^="flashMessage"]')?._x_dataStack?.[0];
                             if (data.status) {
                                 this.loadCart(data.data[0]);
-                                flash?.show('Product added successfully');
+                                flash('Product added successfully');
                             } else {
-                                flash?.show(data.message ?? 'Something went wrong');
+                                flash(data.message ?? 'Something went wrong');
                             }
                             this.resetModal();
                         });
